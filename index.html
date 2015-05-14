@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<head>
+	<style>
+		h1, h2, h3, p{
+			color: #000000;
+			font-family: verdana;
+		} 
+		p {
+			font-size: 12px;
+		}
+	</style>
+</head>
+<title></title>
+<body>
+  <script src="http://d3js.org/d3.v3.min.js"></script>
+  <script src="http://d3js.org/topojson.v1.min.js"></script>
+  <!-- I recommend you host this file on your own, since this will change without warning -->
+  <script src="d3/datamaps.world.min.js"></script>
+  <center>
+  <h2>Around the World: My travel to-date</h2>
+   
+  <div id="text" style="position: relative; width: 65%; text-align:justify";>
+  <p>Like many others at EMI, I'm an avid traveller - I love packing my bags for anything from a short week-long holiday to a longer stint elsewhere. Countries I have visited are shown in <font color="#aaaaaa"><b>dark gray</b></font> on the map, and the <font color="#FC8D59"><b>bubbles</b></font> show places I have stayed for more than 3 months. Bubble sizes correspond to the duration of the stay. I'm proud of my <b>26 countries visited</b> and <b> 9 cities lived</b> count, but I have ways to go to catch the rest of my globe-trotting family!<p>
+  <p></p>
+  <p></p>
+  </div>
+  
+  <div id="container1" style="position: relative; width: 60%;;"></div>
+      
+     <script>
+       //basic map config with custom fills, mercator projection
+      var map = new Datamap({
+        scope: 'world',
+		element: document.getElementById('container1'),
+        projection: 'mercator', 
+		//responsive: true,
+		height: 500,
+        fills: {
+          defaultFill: '#cccccc',
+          lt50: '#FC8D59',
+          gt50: '#aaaaaa'
+        },
+		geographyConfig: {
+			popupOnHover: true, //disable the popup while hovering
+			highlightOnHover: true,
+			highlightFillColor: '#bbbbbb',
+			highlightBorderColor: '#FDFDFD',
+			popupTemplate: function(geography, data) { //this function should just return a string
+          return '<div class="hoverinfo">' + geography.properties.name + '</div>';
+        },
+        },
+        bubblesConfig: {
+			borderWidth: 1,
+			borderColor: '#ffffff',
+			popupOnHover: true,
+			highlightOnHover: true,
+			//highlightFillColor: '#CA7147',
+			highlightFillColor: '#FDA47A',
+        },
+		
+        data: {
+          USA: {fillKey: 'gt50' },
+          CAN: {fillKey: 'gt50' },
+          AUS: {fillKey: 'gt50' },
+		  AUT: {fillKey: 'gt50' },
+          BEL: {fillKey: 'gt50' },
+		  CHN: {fillKey: 'gt50' },
+		  DNK: {fillKey: 'gt50' },
+		  ESP: {fillKey: 'gt50' },
+		  FRA: {fillKey: 'gt50' },
+		  DEU: {fillKey: 'gt50' },
+		  HKG: {fillKey: 'gt50' },
+		  IDN: {fillKey: 'gt50' },
+		  ITA: {fillKey: 'gt50' },
+		  JPN: {fillKey: 'gt50' },
+		  KOR: {fillKey: 'gt50' },
+		  TWN: {fillKey: 'gt50' },
+		  MYS: {fillKey: 'gt50' },
+		  NLD: {fillKey: 'gt50' },
+		  NOR: {fillKey: 'gt50' },
+		  NZL: {fillKey: 'gt50' },
+		  PRT: {fillKey: 'gt50' },
+		  SGP: {fillKey: 'gt50' },
+		  CHE: {fillKey: 'gt50' },
+		  SWE: {fillKey: 'gt50' },
+		  THA: {fillKey: 'gt50' },
+		  KHM: {fillKey: 'gt50' },
+        }
+      })
+      
+       //bubbles, custom popup on hover template
+     map.bubbles([
+       {name: 'Barrington, IL', latitude: 42.15, longitude: -88.14, radius: 24, fillKey: 'lt50', duration: 16},
+       {name: 'Chicago', latitude: 41.87, longitude: -87.6, radius: 5, fillKey: 'lt50', duration: 1.25},
+       {name: 'Auckland', latitude: -36.85, longitude: 174.8, radius: 8, fillKey: 'lt50',
+	   duration: 2},
+	   {name: 'Beijing', latitude: 39.90, longitude: 116.41, radius: 8, fillKey: 'lt50', duration: 2 },
+	   {name: 'Shanghai', latitude: 31.23, longitude: 121.47, radius: 3, fillKey: 'lt50', duration: 0.66 },
+	   {name: 'Copenhagen', latitude: 55.67, longitude: 12.57, radius: 3, fillKey: 'lt50', duration: 0.5 },
+	   {name: 'Seattle', latitude: 47.61, longitude: -122.33, radius: 3, fillKey: 'lt50', duration: 0.33 },
+	   {name: 'Boston', latitude: 42.36, longitude: -71.06, radius: 12, fillKey: 'lt50', duration: 4 },
+	   {name: 'Soperton, GA', latitude: 32.38, longitude: -82.59, radius: 3, fillKey: 'lt50', duration: 0.33 },
+
+     ], {
+       popupTemplate: function(geo, data) {
+         return "<div class='hoverinfo'><strong>" + data.name + ":<br>" + data.duration + " years</strong></div>";
+       }
+     });
+     </script>
+</body>
